@@ -87,7 +87,22 @@ return {
   -- file explorer
   {
     "stevearc/oil.nvim",
-    opts = {},
+    opts = {
+      view_options = {
+        -- Show files and directories that start with "."
+        show_hidden = true,
+        -- Sort file names with numbers in a more intuitive order for humans.
+        natural_order = "fast",
+        -- Sort file and directory names case insensitive
+        case_insensitive = false,
+        sort = {
+          -- sort order can be "asc" or "desc"
+          -- see :help oil-columns to see which columns are sortable
+          { "type", "asc" },
+          { "name", "asc" },
+        },
+      },
+    },
     dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = {
       { "-", "<cmd>Oil<cr>", desc = "Open parent directory" },
@@ -162,5 +177,43 @@ return {
         end,
       })
     end,
+  },
+
+  -- animated cursor
+  {
+    "sphamba/smear-cursor.nvim",
+    lazy = false,
+    opts = {},
+  },
+
+  -- diffview
+  {
+    "sindrets/diffview.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      enhanced_diff_hl = true, -- Enable enhanced diff highlighting
+    },
+    keys = {
+      { "<leader>dv", "<cmd>DiffviewOpen<cr>", desc = "Open Diffview" },
+      { "<leader>dx", "<cmd>DiffviewClose<cr>", desc = "Close Diffview" },
+      { "<leader>dr", "<cmd>DiffviewRefresh<cr>", desc = "Refresh Diffview" },
+    },
+    config = function(_, opts)
+      require("diffview").setup(opts)
+    end,
+  },
+
+  -- session management
+  {
+    "rmagatti/auto-session",
+    lazy = false,
+
+    ---enables autocomplete for opts
+    ---@module "auto-session"
+    ---@type AutoSession.Config
+    opts = {
+      suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+      -- log_level = 'debug',
+    },
   },
 }
