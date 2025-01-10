@@ -40,23 +40,23 @@ return {
         "markdown_inline",
 
         -- Programming languages
-        "elixir", -- Elixir language
-        "eex", -- Phoenix templates
-        "heex", -- Phoenix LiveView templates
+        "elixir",     -- Elixir language
+        "eex",        -- Phoenix templates
+        "heex",       -- Phoenix LiveView templates
         "javascript", -- JavaScript
         "typescript", -- TypeScript
-        "tsx", -- TypeScript JSX (React/Next.js projects)
-        "go", -- Go
-        "python", -- Python
-        "rust", -- Rust
+        "tsx",        -- TypeScript JSX (React/Next.js projects)
+        "go",         -- Go
+        "python",     -- Python
+        "rust",       -- Rust
 
         -- Additional useful languages
-        "bash", -- Shell scripts
-        "json", -- JSON files
-        "yaml", -- YAML files
+        "bash",       -- Shell scripts
+        "json",       -- JSON files
+        "yaml",       -- YAML files
         "dockerfile", -- Dockerfile
-        "toml", -- TOML (used in Rust projects)
-        "sql", -- SQL
+        "toml",       -- TOML (used in Rust projects)
+        "sql",        -- SQL
       },
       highlight = {
         enable = true, -- Enables highlighting
@@ -78,9 +78,9 @@ return {
       ]]
     end,
     keys = {
-      { "<leader>Tf", "<cmd>TestFile<cr>", silent = true, desc = "Run this file" },
+      { "<leader>Tf", "<cmd>TestFile<cr>",    silent = true, desc = "Run this file" },
       { "<leader>Tn", "<cmd>TestNearest<cr>", silent = true, desc = "Run nearest test" },
-      { "<leader>Tl", "<cmd>TestLast<cr>", silent = true, desc = "Run last test" },
+      { "<leader>Tl", "<cmd>TestLast<cr>",    silent = true, desc = "Run last test" },
     },
   },
 
@@ -194,8 +194,8 @@ return {
       enhanced_diff_hl = true, -- Enable enhanced diff highlighting
     },
     keys = {
-      { "<leader>dv", "<cmd>DiffviewOpen<cr>", desc = "Open Diffview" },
-      { "<leader>dx", "<cmd>DiffviewClose<cr>", desc = "Close Diffview" },
+      { "<leader>dv", "<cmd>DiffviewOpen<cr>",    desc = "Open Diffview" },
+      { "<leader>dx", "<cmd>DiffviewClose<cr>",   desc = "Close Diffview" },
       { "<leader>dr", "<cmd>DiffviewRefresh<cr>", desc = "Refresh Diffview" },
     },
     config = function(_, opts)
@@ -210,10 +210,28 @@ return {
 
     ---enables autocomplete for opts
     ---@module "auto-session"
-    ---@type AutoSession.Config
     opts = {
       suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
       -- log_level = 'debug',
     },
+  },
+
+  { "tpope/vim-dadbod" },
+  {
+    'kristijanhusak/vim-dadbod-ui',
+    dependencies = {
+      { 'tpope/vim-dadbod',                     lazy = true },
+      { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true }, -- Optional
+    },
+    cmd = {
+      'DBUI',
+      'DBUIToggle',
+      'DBUIAddConnection',
+      'DBUIFindBuffer',
+    },
+    init = function()
+      -- Your DBUI configuration
+      vim.g.db_ui_use_nerd_fonts = 1
+    end,
   },
 }
