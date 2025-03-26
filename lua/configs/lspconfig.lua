@@ -4,7 +4,7 @@ require("nvchad.configs.lspconfig").defaults()
 local lspconfig = require "lspconfig"
 
 -- EXAMPLE
-local servers = { "html", "cssls", "elixirls" }
+local servers = { "html", "cssls", "elixirls", "tailwindcss", "zls" }
 local nvlsp = require "nvchad.configs.lspconfig"
 
 -- lsps with default config
@@ -44,6 +44,18 @@ lspconfig.tailwindcss.setup {
           { '~H\\".*?class=[\'"](.*?)[\'"]', 1 }, -- Support Phoenix LiveView HEEX
         },
       },
+    },
+  },
+}
+
+lspconfig.zls.setup {
+  cmd = { "zls" }, -- Ensure `zls` is in your PATH
+  filetypes = { "zig" },
+  root_dir = lspconfig.util.root_pattern("build.zig", ".git"),
+  settings = {
+    zls = {
+      enable_snippets = true,
+      enable_autofix = true,
     },
   },
 }

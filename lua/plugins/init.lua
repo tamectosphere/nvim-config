@@ -40,23 +40,26 @@ return {
         "markdown_inline",
 
         -- Programming languages
-        "elixir", -- Elixir language
-        "eex", -- Phoenix templates
-        "heex", -- Phoenix LiveView templates
-        "javascript", -- JavaScript
-        "typescript", -- TypeScript
-        "tsx", -- TypeScript JSX (React/Next.js projects)
-        "go", -- Go
-        "python", -- Python
-        "rust", -- Rust
+        "elixir",          -- Elixir language
+        "eex",             -- Phoenix templates
+        "heex",            -- Phoenix LiveView templates
+        "javascript",      -- JavaScript
+        "typescript",      -- TypeScript
+        "tsx",             -- TypeScript JSX (React/Next.js projects)
+        "go",              -- Go
+        "python",          -- Python
+        "rust",            -- Rust
+        "zig",             -- Zig
+        "ocaml",           -- Added OCaml support
+        "ocaml_interface", -- OCaml `.mli` interface files
 
         -- Additional useful languages
-        "bash", -- Shell scripts
-        "json", -- JSON files
-        "yaml", -- YAML files
+        "bash",       -- Shell scripts
+        "json",       -- JSON files
+        "yaml",       -- YAML files
         "dockerfile", -- Dockerfile
-        "toml", -- TOML (used in Rust projects)
-        "sql", -- SQL
+        "toml",       -- TOML (used in Rust projects)
+        "sql",        -- SQL
       },
       highlight = {
         enable = true, -- Enables highlighting
@@ -78,9 +81,9 @@ return {
       ]]
     end,
     keys = {
-      { "<leader>Tf", "<cmd>TestFile<cr>", silent = true, desc = "Run this file" },
+      { "<leader>Tf", "<cmd>TestFile<cr>",    silent = true, desc = "Run this file" },
       { "<leader>Tn", "<cmd>TestNearest<cr>", silent = true, desc = "Run nearest test" },
-      { "<leader>Tl", "<cmd>TestLast<cr>", silent = true, desc = "Run last test" },
+      { "<leader>Tl", "<cmd>TestLast<cr>",    silent = true, desc = "Run last test" },
     },
   },
 
@@ -194,8 +197,8 @@ return {
       enhanced_diff_hl = true, -- Enable enhanced diff highlighting
     },
     keys = {
-      { "<leader>dv", "<cmd>DiffviewOpen<cr>", desc = "Open Diffview" },
-      { "<leader>dx", "<cmd>DiffviewClose<cr>", desc = "Close Diffview" },
+      { "<leader>dv", "<cmd>DiffviewOpen<cr>",    desc = "Open Diffview" },
+      { "<leader>dx", "<cmd>DiffviewClose<cr>",   desc = "Close Diffview" },
       { "<leader>dr", "<cmd>DiffviewRefresh<cr>", desc = "Refresh Diffview" },
     },
     config = function(_, opts)
@@ -220,7 +223,7 @@ return {
   {
     "kristijanhusak/vim-dadbod-ui",
     dependencies = {
-      { "tpope/vim-dadbod", lazy = true },
+      { "tpope/vim-dadbod",                     lazy = true },
       { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true }, -- Optional
     },
     cmd = {
@@ -257,20 +260,20 @@ return {
       },
       merge_keywords = true,
       highlight = {
-        before = "", -- No special background before
-        keyword = "wide", -- Highlight the keyword itself
-        after = "fg", -- Only foreground color after the keyword
+        before = "",                     -- No special background before
+        keyword = "wide",                -- Highlight the keyword itself
+        after = "fg",                    -- Only foreground color after the keyword
         pattern = [[.*<(KEYWORDS)\s*:]], -- Match pattern for TODO keywords
-        comments_only = true, -- Highlight only in comments
-        max_line_len = 400, -- Ignore very long lines
+        comments_only = true,            -- Highlight only in comments
+        max_line_len = 400,              -- Ignore very long lines
       },
       colors = {
-        error = "#FF6C6B", -- Vibrant Red for FIX
-        todo = "#98C379", -- Green for TODO
-        hack = "#00A7AF", -- New teal color for HACK
-        warn = "#E5C07B", -- Brighter yellow for WARN (updated)
-        perf = "#C678DD", -- Purple for PERF
-        note = "#56B6C2", -- Cyan for NOTE
+        error = "#FF6C6B",   -- Vibrant Red for FIX
+        todo = "#98C379",    -- Green for TODO
+        hack = "#00A7AF",    -- New teal color for HACK
+        warn = "#E5C07B",    -- Brighter yellow for WARN (updated)
+        perf = "#C678DD",    -- Purple for PERF
+        note = "#56B6C2",    -- Cyan for NOTE
         default = "#ABB2BF", -- Default Grey
       },
     },
@@ -278,7 +281,7 @@ return {
       require("todo-comments").setup(opts)
     end,
     keys = {
-      { "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Todo (Trouble)" },
+      { "<leader>xt", "<cmd>TodoTrouble<cr>",   desc = "Todo (Trouble)" },
       { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todo (Telescope)" },
     },
   },
@@ -307,25 +310,29 @@ return {
       event = "VeryLazy",
       opts = {
         lsp = {
+          progress = { enabled = false },
+          signature = { enabled = false },
+          hover = { enabled = false },
+          message = { enabled = false },
           override = {
-            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-            ["vim.lsp.util.stylize_markdown"] = true,
-            ["cmp.entry.get_documentation"] = true,
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = false,
+            ["vim.lsp.util.stylize_markdown"] = false,
+            ["cmp.entry.get_documentation"] = false,
           },
         },
         presets = {
-          bottom_search = false, -- Search box at the bottom
-          command_palette = true, -- Command palette UI
-          long_message_to_split = true, -- Split long messages
-          inc_rename = false, -- Disable incremental renaming UI
-          lsp_doc_border = true, -- Add border to LSP documentation
+          bottom_search = false,
+          command_palette = true,
+          long_message_to_split = true,
+          inc_rename = false,
+          lsp_doc_border = true,
         },
         notify = {
-          enabled = true, -- Use nvim-notify if installed
+          enabled = true,
         },
         commands = {
           history = {
-            view = "popup", -- Show message history in a popup
+            view = "popup",
           },
         },
       },
@@ -333,6 +340,6 @@ return {
         "MunifTanjim/nui.nvim",
         "rcarriga/nvim-notify",
       },
-    },
+    }
   },
 }
