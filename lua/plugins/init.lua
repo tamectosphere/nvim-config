@@ -340,6 +340,73 @@ return {
         "MunifTanjim/nui.nvim",
         "rcarriga/nvim-notify",
       },
-    }
+    },
+  },
+
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    config = function(_, opts)
+      local harpoon = require "harpoon"
+      harpoon:setup(opts)
+    end,
+    keys = {
+      {
+        "<leader>a",
+        function()
+          require("harpoon"):list():add()
+        end,
+        desc = "Harpoon: Add file",
+      },
+      {
+        "<C-e>",
+        function()
+          require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())
+        end,
+        desc = "Harpoon: Toggle Menu",
+      },
+      {
+        "<C-h>",
+        function()
+          require("harpoon"):list():select(1)
+        end,
+        desc = "Harpoon: Go to file 1",
+      },
+      {
+        "<C-j>",
+        function()
+          require("harpoon"):list():select(2)
+        end,
+        desc = "Harpoon: Go to file 2",
+      },
+      {
+        "<C-k>",
+        function()
+          require("harpoon"):list():select(3)
+        end,
+        desc = "Harpoon: Go to file 3",
+      },
+      {
+        "<C-l>",
+        function()
+          require("harpoon"):list():select(4)
+        end,
+        desc = "Harpoon: Go to file 4",
+      },
+      {
+        "<M-[>",
+        function()
+          require("harpoon"):list():prev()
+        end,
+        desc = "Harpoon: Previous File",
+      },
+      {
+        "<M-]>",
+        function()
+          require("harpoon"):list():next()
+        end,
+        desc = "Harpoon: Next File",
+      },
+    },
   },
 }
