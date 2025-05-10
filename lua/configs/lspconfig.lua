@@ -18,8 +18,8 @@ end
 
 -- Custom configuration for `elixirls`
 lspconfig.elixirls.setup {
-  cmd = { "/home/pattadon-san/elixir-ls-v0.24.1/language_server.sh" }, -- Replace with the actual path
-  root_dir = lspconfig.util.root_pattern("mix.exs", ".git"),           -- Define root directory
+  cmd = { "/home/pattadon-san/elixir-ls-v0.24.1/elixir-ls" }, -- Replace with the actual path
+  root_dir = lspconfig.util.root_pattern("mix.exs", ".git"),  -- Define root directory
   settings = {
     elixirLS = {
       dialyzerEnabled = true, -- Enable Dialyzer (type checker)
@@ -35,15 +35,18 @@ lspconfig.eslint.setup({
     format = true,
     codeActionOnSave = { enable = true, mode = "all" },
     validate = "on",
-    experimental = { useFlatConfig = false }, -- set true only if you're using eslint.config.js
+    experimental = { useFlatConfig = false },
   },
   on_attach = function(client, bufnr)
     vim.api.nvim_create_autocmd("BufWritePre", {
       buffer = bufnr,
-      command = "EslintFixAll",
+      callback = function()
+        vim.cmd("EslintFixAll")
+      end,
     })
 
-    -- See diagnostics
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code Action" })
+
     print("ESLint attached:", client.name)
   end,
 })
